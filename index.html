@@ -28,24 +28,31 @@
             };
 
             function UserPlay (){
-                let userInput;
-                console.log("Choose one! \nRock\nPaper\nScissors");
-                userInput = window.prompt()
-                let strUserInput = userInput.toLowerCase();
-                return strUserInput;
+                let userInput; //define userInput
+                console.log("Choose one! \nRock\nPaper\nScissors"); //write to the console the message of what to put
+                userInput = window.prompt() //call this BS prompt because there is no console.readline from the browser window because it is not a real console. took 20 minutes of googling to get this one
+                let strUserInput = userInput.toLowerCase(); //convert all user input to lower to at least get rid of the case sensitivity, any other error handling is outside of the scope of the project
+                return strUserInput; //function returns the user input, which is hopefull "rock", "paper", or "scissors"
+            };
+
+
+            
+
+            function Round(){
+                userInput = UserPlay(); //rock,paper, or scissors
+                computerInput = ComputerPlay(); // rock, paper, or scissors
+
+                switch ("paper" > "Rock")
+
+
 
                 
-            };
-
-            function gameRound(computerInput, userInput){
-
 
 
 
             };
 
-            console.log(ComputerPlay());
-            console.log(UserPlay());
+
         </script>
     </body>
 </html>
