@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta about="Simple Console Game based on the classic game 'Rock Paper Scissors' based on The Odin Project ">
+        <meta author="Julian Weidner">
+    </head>
+    <body>
+        <script>
+            //create function to generate computer input @ randomn
+            function ComputerPlay (){ 
+                let computerInput;
+                let randomNum = Math.random(); //create random numbner between 0 - 1 not including one (just the Math.random rule)
+                if(randomNum < .34){ //if it is less than .34 its rock .33 chance of rock
+                    computerInput = "rock"
+                    return computerInput;
+                }
+                else if(randomNum >= .34 && randomNum < .67){ //if it is greater than or equal to .34 and less than .67 it is Paper!
+            
+                    computerInput = "paper"
+                    return computerInput;
+                }
+                else{ //if it is greater outside of the previous constraints is is scissors, I think the numbers are limited to .67 and greater!
+                    computerInput = "scissors"
+                    return computerInput;
+                }
+
+            };
+
+            function UserPlay (){
+                let userInput;
+                console.log("Choose one! \nRock\nPaper\nScissors");
+                userInput = window.prompt()
+                let strUserInput = userInput.toLowerCase();
+                return strUserInput;
+
+                
+            };
+
+            function gameRound(computerInput, userInput){
+
+
+
+
+            };
+
+            console.log(ComputerPlay());
+            console.log(UserPlay());
+        </script>
+    </body>
+</html>
