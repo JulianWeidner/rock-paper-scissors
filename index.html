@@ -7,6 +7,8 @@
     </head>
     <body>
         <script>
+            const givenInput = "rock";
+            let userWin;
             //create function to generate computer input @ randomn
             function ComputerPlay (){ 
                 let computerInput;
@@ -38,21 +40,53 @@
 
             
 
-            function Round(){
-                userInput = UserPlay(); //rock,paper, or scissors
-                computerInput = ComputerPlay(); // rock, paper, or scissors
+            function Round(userInput){
+                computerInput = ComputerPlay(); // rock, paper, or scissors computer input
 
-                switch ("paper" > "Rock")
+                const gamePhrase = "Rock!\nPaper!\nScissors!\nShoot!\nComputer:"+computerInput+" vs User:"+userInput;//used to signify a match
 
+                console.log(gamePhrase);//write this each time a round is started
 
-
+                if (computerInput === userInput){ //tie game
+                 
+                    console.log("It's a Draw!");
+                    userWin = false;
+                    return userWin;
+                }
                 
-
-
-
+                if (userInput == "rock" && computerInput == "scissors"){ //this is hidious, but I can't think of a better way rn
+                    console.log("You win!");
+                    userWin = true;
+                    return userWin;
+                }
+                if(userInput == "rock" && computerInput == "paper"){
+                    console.log("You lose!");
+                    userWin = false;
+                    return userWin;
+                }
+                if(userInput == "scissors" && computerInput == "paper"){
+                    console.log("You win!");
+                    userWin = true;
+                    return userWin;
+                }
+                if(userInput == "scissors" && computerInput == "rock"){
+                    console.log("You lose!");
+                    userWin = false;
+                    return userWin;
+                }
+                if(userInput == "paper" && computerInput == "rock")
+                {
+                    console.log("You win!");
+                    userWin = true;
+                    return userWin;
+                }
+                if(userInput == "paper" && computerInput == "scissors"){
+                    console.log("You Lose!");
+                    userWin = false;
+                    return userWin;
+                }
             };
-
-
+            console.log(Round(givenInput));
         </script>
     </body>
 </html>
