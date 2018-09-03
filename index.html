@@ -7,15 +7,14 @@
     </head>
     <body>
         <script>
-            let userInput = UserPlay();
-            let computerInput = ComputerPlay();
-        
-            let userScore = 0;
-            let computerScore = 0;
-            let round = 0;
-
-
-
+            let numOfRounds = GetRounds(); 
+            //gets the number of rounds desired to play
+            function GetRounds (){
+                console.log("enter the amount of games you want to play")
+                const numOfRounds = window.prompt();
+                return numOfRounds
+            }
+            
             //create function to generate computer input @ randomn
             function ComputerPlay (){ 
                 let computerInput;
@@ -35,6 +34,7 @@
                 }
 
             };
+            //gets user input returns as a string
             function UserPlay (){
                 let userInput; //define userInput
                 console.log("Choose one! \nRock\nPaper\nScissors"); //write to the console the message of what to put
@@ -42,10 +42,7 @@
                 let strUserInput = userInput.toLowerCase(); //convert all user input to lower to at least get rid of the case sensitivity, any other error handling is outside of the scope of the project
                 return strUserInput; //function returns the user input, which is hopefull "rock", "paper", or "scissors"
             };
-
-
-            
-
+            //logic for the winner between the computers and users for one round based on input fed from the ComputerPlay and UserPlay functions
             function Round(userParam, computerParam){
                 //take params and define them as userInput and computerInput
                 var userInput = userParam;
@@ -63,67 +60,116 @@
                     userWin = false;
                     computerWin = false;
                     drawMatch = true;
-                    return drawMatch;
+                    var results = "draw"
+                    return results;
                 }
 
                 if (userInput == "rock" && computerInput == "scissors"){ //this is hidious, but I can't think of a better way rn
                     console.log("You win!");
                     userWin = true;
                     computerWin = false;
-                    return userWin;
+                    var results = "user"
+                    return results;
+
                 }
                 if(userInput == "rock" && computerInput == "paper"){
                     console.log("You lose!");
                     userWin = false;
                     computerWin = true;
-                    return computerWin;
+                    var results = "computer"
+                    return results
                 }
                 if(userInput == "scissors" && computerInput == "paper"){
                     console.log("You win!");
                     userWin = true;
                     computerWin = false;
-                    return userWin;
+                    var results = "user"
+                    return results;
                 }
                 if(userInput == "scissors" && computerInput == "rock"){
                     console.log("You lose!");
                     userWin = false;
                     computerWin = true;
-                    return computerWin;
+                    var results = "computer"
+                    return results;
                 }
                 if(userInput == "paper" && computerInput == "rock")
                 {
                     console.log("You win!");
-                    userWin = true;
-                    computerWin = false;
-                    return userWin;
+                    var results = "user"
+                    return results
                 }
                 if(userInput == "paper" && computerInput == "scissors"){
                     console.log("You lose!");
                     userWin = false;
-                    computerWin = true;
-                    return computerWin;
+                    var results = "computer"
+                    return results;
                 }
             };
-            
+            //keeps track of the score based on the results fed from the Round function
+            function ScoreTrack(roundResult){
+                let userScore = 0;
+                let computerScore = 0;
+                let drawCount = 0;
 
-            function scoreTrack(){
-                var winner = console.readline();
-                if(userWin == true && computerWin == false){
-                    userScore += 1;
-                    round += 1
+                if(roundResult === "user"){
+                    userScore + 1;
+                    console.log(userScore);
+                    return userScore;
+                    
                 }
-                else if(computerWin == true && userWin == false){
-                    computerScore +=1;
-                    round += 1;
+                else if(roundResult === "computer"){
+                    computerScore + 1;
+                    console.log(computerScore);
+                    return computerScore;
+        
                 }
-                else if (drawMatch == true){
-                    round += 1;
+                else if (roundResult === "draw"){
+                    drawCount + 1;
+                    console.log(drawCount);
+                    return drawCount;
                 }
 
-                console.log(computerScore + " " + userScore);
+                console.log("userscore: "+ userScore);
+                console.log("computerScore: " +computerScore);
+                console.log("drawcount: "+ drawCount);
             }
+            //Calls on all functions to play a game for a determined amount of rounds
+            function Game(roundsParam){
+                //rounds played counter
+                let roundsPlayed = 0;
+                //while loop, while the rounds played counter is less or equal to the rounds param passed from outside the function execute loop
+                while(roundsPlayed <= roundsParam)
+                    {
+                        //gets user input
+                        let userInput = UserPlay();
+                        //gets computer input
+                        let computerInput = ComputerPlay();
+                        //trackers for the rounds
+                        let userScore = 0;
+                        let computerScore = 0;
+                        let drawCount = 0;
+                        //run a round and create a result for ScoreTrack Function
+                        let roundResult = Round(userInput, computerInput)
+                        //track the score
+                        ScoreTrack(roundResult);
 
-            Round(userInput, computerInput);
+                        
+                     
+                        roundsPlayed++
+                    }
+                    console.log("Computer Score:"+ computerScore +"\nYour Score:" + userScore+ "\nDraws:"+drawCount+"\nMatches Played:"+roundsPlayed);
+                
+                
+               
+                
+            }
+            
+            Game(numOfRounds);
+
+
+
+            
         </script>
     </body>
 </html>
