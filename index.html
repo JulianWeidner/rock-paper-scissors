@@ -7,8 +7,15 @@
     </head>
     <body>
         <script>
-            const givenInput = "rock";
-            let userWin;
+            let userInput = UserPlay();
+            let computerInput = ComputerPlay();
+        
+            let userScore = 0;
+            let computerScore = 0;
+            let round = 0;
+
+
+
             //create function to generate computer input @ randomn
             function ComputerPlay (){ 
                 let computerInput;
@@ -28,7 +35,6 @@
                 }
 
             };
-
             function UserPlay (){
                 let userInput; //define userInput
                 console.log("Choose one! \nRock\nPaper\nScissors"); //write to the console the message of what to put
@@ -40,53 +46,84 @@
 
             
 
-            function Round(userInput){
-                computerInput = ComputerPlay(); // rock, paper, or scissors computer input
-
-                const gamePhrase = "Rock!\nPaper!\nScissors!\nShoot!\nComputer:"+computerInput+" vs User:"+userInput;//used to signify a match
-
-                console.log(gamePhrase);//write this each time a round is started
-
+            function Round(userParam, computerParam){
+                //take params and define them as userInput and computerInput
+                var userInput = userParam;
+                var computerInput = computerParam;
+                var userWin = false; //default to false
+                var computerWin = false;
+                var drawMatch = false;
+                const gamePhrase = "Rock!\nPaper!\nScissors!\nShoot!\nComputer:" + computerInput + " vs User:" + userInput;//used to signify a match
+                //
+                //Write Rock paper scissors phrase everytime the function is called
+                console.log(gamePhrase);
+                //game logic NEEDS WORK
                 if (computerInput === userInput){ //tie game
-                 
-                    console.log("It's a Draw!");
+                    console.log("It's a Draw!");   
                     userWin = false;
-                    return userWin;
+                    computerWin = false;
+                    drawMatch = true;
+                    return drawMatch;
                 }
-                
+
                 if (userInput == "rock" && computerInput == "scissors"){ //this is hidious, but I can't think of a better way rn
                     console.log("You win!");
                     userWin = true;
+                    computerWin = false;
                     return userWin;
                 }
                 if(userInput == "rock" && computerInput == "paper"){
                     console.log("You lose!");
                     userWin = false;
-                    return userWin;
+                    computerWin = true;
+                    return computerWin;
                 }
                 if(userInput == "scissors" && computerInput == "paper"){
                     console.log("You win!");
                     userWin = true;
+                    computerWin = false;
                     return userWin;
                 }
                 if(userInput == "scissors" && computerInput == "rock"){
                     console.log("You lose!");
                     userWin = false;
-                    return userWin;
+                    computerWin = true;
+                    return computerWin;
                 }
                 if(userInput == "paper" && computerInput == "rock")
                 {
                     console.log("You win!");
                     userWin = true;
+                    computerWin = false;
                     return userWin;
                 }
                 if(userInput == "paper" && computerInput == "scissors"){
-                    console.log("You Lose!");
+                    console.log("You lose!");
                     userWin = false;
-                    return userWin;
+                    computerWin = true;
+                    return computerWin;
                 }
             };
-            console.log(Round(givenInput));
+            
+
+            function scoreTrack(){
+                var winner = console.readline();
+                if(userWin == true && computerWin == false){
+                    userScore += 1;
+                    round += 1
+                }
+                else if(computerWin == true && userWin == false){
+                    computerScore +=1;
+                    round += 1;
+                }
+                else if (drawMatch == true){
+                    round += 1;
+                }
+
+                console.log(computerScore + " " + userScore);
+            }
+
+            Round(userInput, computerInput);
         </script>
     </body>
 </html>
