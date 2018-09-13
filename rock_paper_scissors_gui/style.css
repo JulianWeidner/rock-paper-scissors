@@ -1,49 +1,8 @@
-*{
- font-family: 'Muli', sans-serif;
- font-size: 12px;
+.score-row p {
+  display: inline;
 }
 
-body {
-  padding: 0;
-  margin: 0;
+.selection-row h5 {
+  display: inline;
 }
-
-html {
-  background-color: #393939;
-}
-
-#title {
-  margin: 0;
-  padding: 3%;
-  text-align: center;
-  text-decoration: underline;
-  font-variant: small-caps;
-  font-size: 40px;
-  color: #db504a;
-  background-color: #24282a;
-}
-
-.btn-row{
-  width: 100%;
-  background-color: #393939;
-  text-align: center;
-}
-
-.btn-row button {
-  margin: 5%;
-  padding: 8%;
-  border-radius: 50%;
-  border-style: solid;
-  border-color: #24282a;
-  color: #24282a;
-  background-color: #db504a;
-  font-size: 1.7vw;
-  
-}
-
-.score-row p{
-  font-size: 2vw;
-  color: #db504a;
-}
-
 
