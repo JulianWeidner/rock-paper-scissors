@@ -1,8 +1,68 @@
-.score-row p {
-  display: inline;
+*{
+  font-family: 'Muli', sans-serif;
+  font-size: 12px;
+ }
+ 
+ body {
+   padding: 0;
+   margin: 0;
+ }
+ 
+ html {
+   background-color: #393939;
+ }
+ 
+ #title {
+   margin: 0;
+   padding: 3%;
+   text-align: center;
+   text-decoration: underline;
+   font-variant: small-caps;
+   font-size: 40px;
+   color: #db504a;
+   background-color: #24282a;
+ }
+ 
+ .btn-row{
+   width: 100%;
+   background-color: #393939;
+   text-align: center;
+ }
+ 
+ .btn-row button {
+   margin: 5%;
+   padding: 8%;
+   border-radius: 50%;
+   border-style: solid;
+   border-color: #24282a;
+   color: #24282a;
+   background-color: #db504a;
+   font-size: 1.7vw;
+   
+ }
+ 
+.score-row {
+  padding-left: 6px;
 }
 
-.selection-row h5 {
-  display: inline;
-}
+ .score-row p{
+   font-size: 2vw;
+   color: #db504a;
+   display: inline;
+   
+ }
+ 
 
+ .selection-row {
+  
+  color: #db504a;
+  text-align: center;
+  padding: 10px 0;
+ }
+ 
+ h5 {
+   padding: 5px;
+   display: inline-block;
+   font-size: 2vw;
+ }
+ 

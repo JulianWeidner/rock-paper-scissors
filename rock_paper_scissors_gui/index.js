@@ -1,139 +1,125 @@
-
 //Global Vars
-//Get button Elements 
-const rockBtn = document.getElementById('rock-btn');
-const paperBtn = document.getElementById('paper-btn');
-const scissorsBtn = document.getElementById('scissors-btn');
-// get h5 element 4 user results
-const userSelectionEle = document.getElementById('user-selection');
-let userSelectionText = userSelectionEle.textContent;
-// get h5 element for computer results
-const computerSelectionEle = document.getElementById('computer-selection');
-let computerSelectionText = computerSelectionEle.textContent;
-//get p element for computer score
-const computerScoreEle = document.getElementById('computer-count');
-let computerScoreText = computerScoreEle.textContent;
-//get p element for user score
-const userScoreEle = document.getElementById('user-count');
-let userScoreText = userScoreEle.textContent;
-//get p element for tie
-const tieScoreEle = document.getElementById('tie-count');
-let tieScoreText = tieScoreEle.textContent;
-
-
-
-
-
-
-//Event listeners
-rockBtn.addEventListener('click', () => {
-    userSelectionText = 'rock';
-    userSelectionEle.textContent = userSelectionText;
-    
-    
-    
-});
-
-rockBtn.addEventListener('click', () => {
-
-    computerSelectionText = ComputerPlay();
-    computerSelectionEle.textContent = computerSelectionText;
-});
-
-paperBtn.addEventListener('click', () => {
-    userSelectionText = 'paper';
-    userSelectionEle.textContent = userSelectionText;
-});
-
-paperBtn.addEventListener('click', () => {
-
-    computerSelectionText = ComputerPlay();
-    computerSelectionEle.textContent = computerSelectionText;
-});
-
-scissorsBtn.addEventListener('click', () => {
-	userSelectionText = 'scissors';
-    userSelectionEle.textContent = userSelectionText;
-});
-
-scissorsBtn.addEventListener('click', () => {
-
-    computerSelectionText = ComputerPlay();
-    computerSelectionEle.textContent = computerSelectionText;
-});
+let buttonGroup = document.querySelectorAll('.btn-game')
 
 
 //functions
-function ComputerPlay (){ 
-    let computerInput;
-    let randomNum = Math.random(); //create random numbner between 0 - 1 not including one (just the Math.random rule)
-    if(randomNum < .34){ //if it is less than .34 its rock .33 chance of rock
-        computerInput = "rock";
-        console.log(computerInput);
-        return computerInput;
-    }
-    else if(randomNum >= .34 && randomNum < .67){ //if it is greater than or equal to .34 and less than .67 it is Paper!
+function GetComputerSelection (){
+  let randomNum = Math.trunc(Math.random()*3); 
+  switch (randomNum){
+    case 0: return ("rock");
+    case 1: return ("paper");
+    case 2: return ("scissors");
+    default: "Error Math.random outside of 0-3 scope"; 
+  }
+}
 
-        computerInput = "paper";
-        console.log(computerInput);
-        return computerInput;
-    }
-    else{ //if it is greater outside of the previous constraints is is scissors, I think the numbers are limited to .67 and greater!
-        computerInput = "scissors";
-        console.log(computerInput);
-        return computerInput;
-    }
+function RunRound(userSelectionParam, computerSelectionParam){
+  if(userSelectionParam == computerSelectionParam)
+  {
+    console.log('tie');
+    return ('tie');
+  }
+  if (userSelectionParam == "rock" && computerSelectionParam == "scissors"){ //this is hidious, but I can't think of a better way rn
+      
+      var results = "user"
+      return results;
 
-};
-if (computerInput === userInput){ //tie game
-    console.log("It's a Draw!");   
-    var results = "draw"
-    return results;
+  }
+  if(userSelectionParam == "rock" && computerSelectionParam == "paper"){
+      console.log("You lose!");
+      var results = "computer"
+      return results
+  }
+  if(userSelectionParam == "scissors" && computerSelectionParam == "paper"){
+      console.log("You win!");
+      var results = "user"
+      return results;
+  }
+  if(userSelectionParam == "scissors" && computerSelectionParam == "rock"){
+      console.log("You lose!");
+      var results = "computer"
+      return results;
+  }
+  if(userSelectionParam == "paper" && computerSelectionParam == "rock")
+  {
+      console.log("You win!");
+      var results = "user"
+      return results
+  }
+  if(userSelectionParam == "paper" && computerSelectionParam == "scissors"){
+      console.log("You lose!");
+      var results = "computer"
+      return results;
+  }
+
+}
+
+function ScoreMatch(roundWinnerParam){
+  const tieElem = document.getElementById('tie-count');
+  let tieText = tieElem.textContent;
+  
+
+  const userElem = document.getElementById('user-count');
+  let userText = userElem.textContent;
+
+  const computerElem = document.getElementById('computer-count')
+  let computerText = computerElem.textContent;
+  
+  /*switch(roundWinnerParam) {
+    case 'tie': tieText++;
+                tieElem.textContent = tieText;
+
+    case 'user':  userText++;
+                  userElem.textContent = userText;
+    case 'computer':  computerText++;
+                      computerElem.textContent = computerText;
+    
+  }*/
+
+  if(roundWinnerParam == 'user')
+  {
+    userText++;
+    userElem.textContent = userText;
+  }
+  else if(roundWinnerParam == 'computer')
+  {
+    computerText++;
+    computerElem.textContent = computerText;
+  }
+  else
+  {
+    tieText++;
+    tieElem.textContent = tieText;
+  }
 }
 
 
+//button event handling
+Array.from(buttonGroup).map(i => AddEventHandler(i));
 
-function Round(){
-    //take params and define them as userInput and computerInput
-    var userInput = userParam;
-    var computerInput = computerParam;
-    const gamePhrase = "Rock!\nPaper!\nScissors!\nShoot!\nComputer:" + computerInput + " vs User:" + userInput;//used to signify a match
-    //
-    //Write Rock paper scissors phrase everytime the function is called
-    console.log(gamePhrase);
-    //game logic NEEDS WORK
+function AddEventHandler(buttonArrayParam){
+  let userSelection;
+  let computerSelection;
+  let roundWinner;
+  let scoreBoard;
+  //vs section
+  const userPick = document.getElementById('user-selection');
+  const computerPick = document.getElementById('computer-selection');
+  
 
+  
+  buttonArrayParam.addEventListener('click', function(e){
+    userSelection = e.target.value;
+    computerSelection = GetComputerSelection();
+    userPick.textContent = userSelection;//shows what user picked 
+    computerPick.textContent = computerSelection; // vs computer picked
+    roundWinner = RunRound(userSelection, computerSelection);
+    scoreBoard = ScoreMatch(roundWinner);
+    
+    
+    
+  });
+  
+}
+//https://github.com/inuhoo/rock-paper-scissors/blob/master/scripts.js
 
-    if (userInput == "rock" && computerInput == "scissors"){ //this is hidious, but I can't think of a better way rn
-        console.log("You win!");
-        var results = "user"
-        return results;
-
-    }
-    if(userInput == "rock" && computerInput == "paper"){
-        console.log("You lose!");
-        var results = "computer"
-        return results
-    }
-    if(userInput == "scissors" && computerInput == "paper"){
-        console.log("You win!");
-        var results = "user"
-        return results;
-    }
-    if(userInput == "scissors" && computerInput == "rock"){
-        console.log("You lose!");
-        var results = "computer"
-        return results;
-    }
-    if(userInput == "paper" && computerInput == "rock")
-    {
-        console.log("You win!");
-        var results = "user"
-        return results
-    }
-    if(userInput == "paper" && computerInput == "scissors"){
-        console.log("You lose!");
-        var results = "computer"
-        return results;
-    }
-};
